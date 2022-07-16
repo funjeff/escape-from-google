@@ -7,14 +7,43 @@ import engine.Sprite;
 import map.Room;
 
 
-public class Scientist {
+public class ScientistRight extends GameObject{
 
+	Light l;
+	
+	boolean walkingLeft = false;
+	
+	public ScientistRight () {
+		this.setSprite(new Sprite ("resources/sprites/scientist.png"));
+		l = new Light ();
+	}
+	
+	@Override
+	public void frameEvent () {
+		if (walkingLeft) {
+			if (!this.goX(this.getX() - 3)) {
+				walkingLeft = false;
+				this.getAnimationHandler().setFlipHorizontal(false);
+			}
+		} else {
+			if (!this.goX(this.getX() + 3)) {
+				walkingLeft = true;
+				this.getAnimationHandler().setFlipHorizontal(true);
+			}
+		}
+		l.setX(this.getX() - 75);
+		l.setY(this.getY() + 20);
+		l.frameEvent();
+		l.draw();
+	}
+	
+	
 	
 	private class Light extends GameObject {
 		int height = 240;
 		public Light () {
 			this.adjustHitboxBorders();
-			this.setSprite(new Sprite ("resources/sprites/config/fireflyLight.txt"));
+			this.setSprite(new Sprite ("resources/sprites/Light.png"));
 			this.enablePixelCollisions();
 			this.getAnimationHandler().setFrameTime(250);
 			this.getAnimationHandler().enableAlternate();
@@ -43,8 +72,8 @@ public class Scientist {
 				this.getAnimationHandler().setHeight(height);
 				this.getAnimationHandler().scale(208, height);
 				if (this.isColliding("Robot")) {
-					this.getCollisionInfo().getCollidingObjects().get(0).setX(2000);
-					this.getCollisionInfo().getCollidingObjects().get(0).setY(100);
+					this.getCollisionInfo().getCollidingObjects().get(0).setX(1950);
+					this.getCollisionInfo().getCollidingObjects().get(0).setY(320);
 				}
 				if (this.isColliding("Plant")) {
 					Iterator<GameObject> iter = this.getCollisionInfo().getCollidingObjects().iterator();

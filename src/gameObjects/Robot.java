@@ -15,9 +15,11 @@ public class Robot extends GameObject {
 	boolean learnedDuck = true;
 	boolean learnedButtons = true;
 	boolean learnedPlant = true;
+	boolean learnedLadder = true;
 	
 	
 	boolean crouching = false;
+	boolean onLadder = false;
 	
 	public Robot () {
 		this.setSprite(new Sprite ("resources/sprites/robot.png"));
@@ -38,12 +40,20 @@ public class Robot extends GameObject {
 			vy = vy + 2;
 		}
 		
+		if (this.isColliding("Ladder") && GameCode.keyCheck('W', this)) {
+			this.goY(this.getY() -3);
+			vy = 0;
+		}
+		
+		
 		if (!this.goY(this.getY() + vy)) {
 			if (falling) {
 				while (this.goY(this.getY() + 1));
 			}
 			vy = 0;
 		}
+		
+		
 		
 		if (learnedPlant && GameCode.keyPressed('P', this)) {
 			Plant p = new Plant ();

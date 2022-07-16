@@ -39,7 +39,7 @@ public class GameCode {
         Setup.initAll();
 		Room.loadRoom ("resources/mapdata/lab.tmj");
 		r = new Robot ();
-		r.declare(170, 440);
+		r.declare(3170, 290);
 		
 	//	Bat b = new Bat();
 	//	b.declare(300,200);
