@@ -2,7 +2,7 @@ package engine;
 
 import java.util.ArrayList;
 
-
+import gameObjects.Robot;
 import map.Room;
 import java.awt.event.KeyEvent;
 
@@ -13,6 +13,8 @@ public class GameCode {
 	static int veiwX;
 	static int veiwY;
 	
+	
+	static Robot r = new Robot ();
 
 	static ArrayList <Asker> askers = new ArrayList <Asker> ();
 	
@@ -34,8 +36,9 @@ public class GameCode {
 	public static void init () {
 		
 		//Test
-		Room.loadRoom ("resources/mapdata/test_floor.tmj");
-		
+		Room.loadRoom ("resources/mapdata/lab.tmj");
+		r = new Robot ();
+		r.declare(170, 440);
         
 		
 	//	Bat b = new Bat();
@@ -174,28 +177,7 @@ public class GameCode {
 		return RenderLoop.wind.getResolution()[1];
 	}
 	
-	public static int getViewX() {
-		return veiwX;
-	}
 
-
-
-	public static void setViewX(int newVeiwX) {
-		veiwX = newVeiwX;
-	}
-
-
-
-	public static int getViewY() {
-		return veiwY;
-	}
-
-
-
-	public static void setViewY(int newVeiwY) {
-		veiwY = newVeiwY;
-	}
-	
 	
 
 
