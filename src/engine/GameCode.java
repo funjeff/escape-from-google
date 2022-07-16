@@ -2,15 +2,7 @@ package engine;
 
 import java.util.ArrayList;
 
-import gameObjects.Bat;
-import gameObjects.BombMaster;
-import gameObjects.Bombhog;
-import gameObjects.Bombmire;
-import gameObjects.CactusDude;
-import gameObjects.WhatsUpDude;
-import gameObjects.Heart;
-import gameObjects.Hud;
-import gameObjects.MachineBomber;
+
 import map.Room;
 import java.awt.event.KeyEvent;
 
@@ -21,12 +13,10 @@ public class GameCode {
 	static int veiwX;
 	static int veiwY;
 	
-	static BombMaster mast;
 
 	static ArrayList <Asker> askers = new ArrayList <Asker> ();
 	
 
-	static WhatsUpDude e = new WhatsUpDude ();
 
 	public static void testBitch () {
 		
@@ -44,16 +34,7 @@ public class GameCode {
 	public static void init () {
 		
 		//Test
-		Room.loadRoom ("resources/mapdata/master_bomber_worldmap.tmj");
-		
-		mast = new BombMaster ();
-		mast.declare();
-		
-
-		Hud hud = new Hud();
-		hud.declare();
-		
-		e.declare (200,100);
+	//	Room.loadRoom ("resources/mapdata/master_bomber_worldmap.tmj");
 		
         
 		
@@ -90,12 +71,7 @@ public class GameCode {
 			}
 		}
 		
-		mast = new BombMaster ();
-		mast.declare();
-		
-
-		Hud hud = new Hud();
-		hud.declare();
+	
 	
 		
 	}
@@ -220,9 +196,7 @@ public class GameCode {
 		veiwY = newVeiwY;
 	}
 	
-	public static BombMaster getBombMaster() {
-		return mast;
-	}
+	
 
 
 
