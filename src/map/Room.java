@@ -1069,7 +1069,7 @@ public static MapTile[] getAllCollidingTiles (GameObject obj) {
 			MapObject curr = getMapObjectsList ().get (i);
 			if (curr.getType ().equals ("tile")) {
 				int tileTypeID = curr.getTile ();
-				String objTypename = dataList.get (i).getFName ();
+				String objTypename = dataList.get (tileTypeID).getFName ();
 				GameObject newObj = ObjectHandler.getInstance (objTypename);
 				if (newObj != null) {
 					newObj.declare (curr.pos.x, curr.pos.y);

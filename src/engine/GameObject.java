@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
-import gameObjects.Fragment;
 import map.Room;
 
 /**
@@ -456,40 +455,40 @@ public abstract class GameObject extends GameAPI {
 		
 	}
 	
-	public void breakToFragments(String fragName) {
-		breakToFragments(fragName,3,10,1,10,0,0);
-	}
-	
-	public void breakToFragments(String fragName, int minFrags, int maxFrags) {	
-		breakToFragments(fragName,minFrags,maxFrags,1,10,0,0);
-	}
-	
-	public void breakToFragments(String fragName, int minFrags, int maxFrags, int minSpeed, int maxSpeed) {
-		
-		breakToFragments(fragName,minFrags,maxFrags,minSpeed,maxSpeed,0,0);
-		
-	}
-	
-	public void breakToFragments(String fragName, int minFrags, int maxFrags, int minSpeed, int maxSpeed, int fragOffsetX, int fragOffsetY) {
-		
-		Random r = new Random ();
-		
-		int fragNum;
-		
-		if (maxFrags == 1) {
-			fragNum = 1;
-		} else {
-			fragNum = r.nextInt(maxFrags-minFrags) + minFrags;
-		}
-		
-		for (int i = 0; i < fragNum; i++) {
-			Fragment frag = new Fragment(fragName);
-			frag.throwObj( r.nextDouble()*2*Math.PI, r.nextInt(maxSpeed - minSpeed) + minSpeed);
-			frag.declare(this.getX() + fragOffsetX,this.getY() + fragOffsetY);
-		}
-		
-	}
-	
+//	public void breakToFragments(String fragName) {
+//		breakToFragments(fragName,3,10,1,10,0,0);
+//	}
+//	
+//	public void breakToFragments(String fragName, int minFrags, int maxFrags) {	
+//		breakToFragments(fragName,minFrags,maxFrags,1,10,0,0);
+//	}
+//	
+//	public void breakToFragments(String fragName, int minFrags, int maxFrags, int minSpeed, int maxSpeed) {
+//		
+//		breakToFragments(fragName,minFrags,maxFrags,minSpeed,maxSpeed,0,0);
+//		
+//	}
+//	
+//	public void breakToFragments(String fragName, int minFrags, int maxFrags, int minSpeed, int maxSpeed, int fragOffsetX, int fragOffsetY) {
+//		
+//		Random r = new Random ();
+//		
+//		int fragNum;
+//		
+//		if (maxFrags == 1) {
+//			fragNum = 1;
+//		} else {
+//			fragNum = r.nextInt(maxFrags-minFrags) + minFrags;
+//		}
+//		
+//		for (int i = 0; i < fragNum; i++) {
+//			Fragment frag = new Fragment(fragName);
+//			frag.throwObj( r.nextDouble()*2*Math.PI, r.nextInt(maxSpeed - minSpeed) + minSpeed);
+//			frag.declare(this.getX() + fragOffsetX,this.getY() + fragOffsetY);
+//		}
+//		
+//	}
+//	
 	private boolean runPixelCollsions (GameObject pixelObject, Rectangle hitboxObject) {
 		Raster mask;
 		mask = pixelObject.getAnimationHandler().getImage().getFrame(pixelObject.getAnimationHandler().getFrame()).getAlphaRaster();
@@ -914,7 +913,7 @@ public abstract class GameObject extends GameAPI {
 		xprevious = x;
 		spriteX =  (spriteX + (val - x));
 		x = val;
-		if (Room.isColliding(this)) {
+		if (Room.isColliding(this) || this.isColliding("Door")) {
 			x = xprevious;
 			spriteX = (spriteX - (val- x));
 			return false;
@@ -930,7 +929,7 @@ public abstract class GameObject extends GameAPI {
 		yprevious = y;
 		spriteY =  (spriteY + (yval - y));
 		y = yval;
-		if (Room.isColliding(this)) {
+		if (Room.isColliding(this) || this.isColliding("Door")) {
 			x = xprevious;
 			spriteX = (spriteX - (xval- x));
 			y = yprevious;
@@ -946,7 +945,7 @@ public abstract class GameObject extends GameAPI {
 		yprevious = y;
 		spriteY =  (spriteY + (val - y));
 		y = val;
-		if (Room.isColliding(this)) {
+		if (Room.isColliding(this) || this.isColliding("Door")) {
 			y = yprevious;
 			spriteY = (spriteY - (val - y));
 			return false;
@@ -1299,8 +1298,8 @@ public abstract class GameObject extends GameAPI {
 		
 		
 		
-		hitboxXOffset[0] = x - this.x;
-		hitboxYOffset[0] = y - this.y;
+		hitboxXOffset[0] = x;
+		hitboxYOffset[0] = y;
 		hitboxWidth[0] = width;
 		hitboxHeight[0] = height;
 	}

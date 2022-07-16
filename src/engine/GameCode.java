@@ -3,6 +3,7 @@ package engine;
 import java.util.ArrayList;
 
 import gameObjects.ScanReigon;
+import gameObjects.Robot;
 import map.Room;
 import java.awt.event.KeyEvent;
 
@@ -13,6 +14,8 @@ public class GameCode {
 	static int veiwX;
 	static int veiwY;
 	static boolean isScanMode = true;
+	
+	static Robot r2 = new Robot ();
 
 	static ArrayList <Asker> askers = new ArrayList <Asker> ();
 	
@@ -34,13 +37,15 @@ public class GameCode {
 	public static void init () {
 		
 		//Test
-		//Room.loadRoom ("resources/mapdata/test_floor.tmj");
+        Setup.initAll();
+		Room.loadRoom ("resources/mapdata/lab.tmj");
 		ScanReigon r = new ScanReigon (null);
 		r.setRadius (40);
 		r.setTitleText ("HELLO");
 		r.setDescText (new String[] {"DESCRIPTION", "TEXT"});
 		r.declare (256, 256);
-        
+		r2 = new Robot ();
+		r2.declare(170, 440);
 		
 	//	Bat b = new Bat();
 	//	b.declare(300,200);
@@ -177,18 +182,6 @@ public class GameCode {
 	public static int getResolutionY() {
 		return RenderLoop.wind.getResolution()[1];
 	}
-	
-	public static int getViewX() {
-		return veiwX;
-	}
-
-
-
-	public static void setViewX(int newVeiwX) {
-		veiwX = newVeiwX;
-	}
-
-
 
 	public static int getViewY() {
 		return veiwY;
