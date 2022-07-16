@@ -34,7 +34,7 @@ public class GameCode {
 	public static void init () {
 		
 		//Test
-	//	Room.loadRoom ("resources/mapdata/master_bomber_worldmap.tmj");
+		Room.loadRoom ("resources/mapdata/test_floor.tmj");
 		
         
 		
