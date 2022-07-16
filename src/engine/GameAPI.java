@@ -111,7 +111,7 @@ public abstract class GameAPI {
 	 * @return The cursor x-coordinate
 	 */
 	public int getCursorX () {
-		return (int)(GameLoop.getInputImage ().getCursorX () * 1280);
+		return (int)(GameLoop.getInputImage ().getCursorX () * RenderLoop.wind.getResolution ()[0]);
 	}
 	
 	/**
@@ -119,7 +119,7 @@ public abstract class GameAPI {
 	 * @return The cursor y-coordinate
 	 */
 	public int getCursorY () {
-		return (int)(GameLoop.getInputImage ().getCursorY () * 720);
+		return (int)(GameLoop.getInputImage ().getCursorY () * RenderLoop.wind.getResolution ()[1]);
 	}
 	
 	/**

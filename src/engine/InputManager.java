@@ -232,8 +232,9 @@ public class InputManager {
 		}
 		
 		private void updateMouseCoords (MouseEvent e) {
-			cursorX = e.getX ();
-			cursorY = e.getY ();
+			
+			cursorX = (double)e.getX () / RenderLoop.wind.getContentPane ().getWidth ();
+			cursorY = (double)e.getY () / RenderLoop.wind.getContentPane ().getHeight ();
 			
 			if (cursorX < 0) {
 				cursorX = 0;

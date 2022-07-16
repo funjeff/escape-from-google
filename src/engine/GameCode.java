@@ -2,7 +2,7 @@ package engine;
 
 import java.util.ArrayList;
 
-
+import gameObjects.ScanReigon;
 import map.Room;
 import java.awt.event.KeyEvent;
 
@@ -12,7 +12,7 @@ public class GameCode {
 	
 	static int veiwX;
 	static int veiwY;
-	
+	static boolean isScanMode = true;
 
 	static ArrayList <Asker> askers = new ArrayList <Asker> ();
 	
@@ -34,8 +34,12 @@ public class GameCode {
 	public static void init () {
 		
 		//Test
-		Room.loadRoom ("resources/mapdata/test_floor.tmj");
-		
+		//Room.loadRoom ("resources/mapdata/test_floor.tmj");
+		ScanReigon r = new ScanReigon (null);
+		r.setRadius (40);
+		r.setTitleText ("HELLO");
+		r.setDescText (new String[] {"DESCRIPTION", "TEXT"});
+		r.declare (256, 256);
         
 		
 	//	Bat b = new Bat();
@@ -196,9 +200,12 @@ public class GameCode {
 		veiwY = newVeiwY;
 	}
 	
+	public static void setScanMode (boolean scanMode) {
+		isScanMode = scanMode;
+	}
 	
-
-
-
+	public static boolean isScanMode () {
+		return isScanMode;
+	}
 	
 }
