@@ -76,8 +76,8 @@ public class ScanReigon extends GameObject {
 	@Override
 	public void frameEvent () {
 		if (GameCode.isScanMode ()) {
-			int mouseX = getCursorX () - Room.getViewX ();
-			int mouseY = getCursorY () - Room.getViewY ();
+			int mouseX = getCursorX () + Room.getViewX ();
+			int mouseY = getCursorY () + Room.getViewY ();
 			double dist = (mouseX - centerX) * (mouseX - centerX) + (mouseY - centerY) * (mouseY - centerY);
 			if (dist < radius * radius) {
 				ArrayList<MouseEvent> events = getMouseEvents ();
@@ -204,7 +204,7 @@ public class ScanReigon extends GameObject {
 			
 			//Draw circle
 			double circleRadius = radius < 40 ? radius - 12 : radius * 0.7;
-			g.drawOval ((int)(centerX - circleRadius), (int)(centerY - circleRadius), (int)(circleRadius * 2), (int)(circleRadius * 2));
+			g.drawOval ((int)(centerX - circleRadius) - Room.getViewX (), (int)(centerY - circleRadius) - Room.getViewY (), (int)(circleRadius * 2), (int)(circleRadius * 2));
 			
 			if (time > 30) {
 				Stroke s2 = new BasicStroke (2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER);
