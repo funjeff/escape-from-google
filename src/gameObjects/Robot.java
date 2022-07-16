@@ -14,6 +14,7 @@ public class Robot extends GameObject {
 	boolean learnedJump = true;
 	boolean learnedDuck = true;
 	boolean learnedButtons = true;
+	boolean learnedPlant = true;
 	
 	
 	boolean crouching = false;
@@ -44,8 +45,17 @@ public class Robot extends GameObject {
 			vy = 0;
 		}
 		
-		if (this.isColliding("Button") && GameCode.keyPressed(KeyEvent.VK_ENTER, this)) {
-			((Button)this.getCollisionInfo().getCollidingObjects().get(0)).pushButton();
+		if (learnedPlant && GameCode.keyPressed('P', this)) {
+			Plant p = new Plant ();
+			p.declare(this.getX(), this.getY() + 16);
+		}
+		
+		if ((this.isColliding("Button1") || this.isColliding("Button2")) && GameCode.keyPressed(KeyEvent.VK_ENTER, this) && learnedButtons) {
+			try {
+				((Button1)this.getCollisionInfo().getCollidingObjects().get(0)).pushButton();
+			} catch (ClassCastException e) {
+				((Button2)this.getCollisionInfo().getCollidingObjects().get(0)).pushButton();
+			}
 		}
 		
 		
@@ -90,7 +100,7 @@ public class Robot extends GameObject {
 			}
 		}
 		
-		if (GameCode.keyPressed(KeyEvent.VK_SPACE, this) && learnedJump && vy == 0) {
+		if (GameCode.keyPressed(KeyEvent.VK_SPACE, this) && learnedJump && vy == 0 && !crouching) {
 			vy = -20;
 		}
 	

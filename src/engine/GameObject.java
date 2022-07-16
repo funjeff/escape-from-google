@@ -913,7 +913,7 @@ public abstract class GameObject extends GameAPI {
 		xprevious = x;
 		spriteX =  (spriteX + (val - x));
 		x = val;
-		if (Room.isColliding(this)) {
+		if (Room.isColliding(this) || this.isColliding("Door")) {
 			x = xprevious;
 			spriteX = (spriteX - (val- x));
 			return false;
@@ -929,7 +929,7 @@ public abstract class GameObject extends GameAPI {
 		yprevious = y;
 		spriteY =  (spriteY + (yval - y));
 		y = yval;
-		if (Room.isColliding(this)) {
+		if (Room.isColliding(this) || this.isColliding("Door")) {
 			x = xprevious;
 			spriteX = (spriteX - (xval- x));
 			y = yprevious;
@@ -945,7 +945,7 @@ public abstract class GameObject extends GameAPI {
 		yprevious = y;
 		spriteY =  (spriteY + (val - y));
 		y = val;
-		if (Room.isColliding(this)) {
+		if (Room.isColliding(this) || this.isColliding("Door")) {
 			y = yprevious;
 			spriteY = (spriteY - (val - y));
 			return false;

@@ -36,10 +36,10 @@ public class GameCode {
 	public static void init () {
 		
 		//Test
+        Setup.initAll();
 		Room.loadRoom ("resources/mapdata/lab.tmj");
 		r = new Robot ();
 		r.declare(170, 440);
-        
 		
 	//	Bat b = new Bat();
 	//	b.declare(300,200);

@@ -322,6 +322,7 @@ public class ObjectHandler {
 			return objectClasses.get(name);
 		}
 		for (int i = 0; i < packages.size(); i++) {
+			
 			try {
 				Class <?> c = Class.forName(packages.get(i) + "." + name);
 				objectClasses.put(name,c);
@@ -338,6 +339,7 @@ public class ObjectHandler {
 		try {
 			return (GameObject)c.getConstructor().newInstance();
 		} catch (Exception e) {
+			//e.printStackTrace();
 			return null;
 		}
 	}
