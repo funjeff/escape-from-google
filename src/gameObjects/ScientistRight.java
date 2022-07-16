@@ -15,6 +15,7 @@ public class ScientistRight extends GameObject{
 	
 	public ScientistRight () {
 		this.setSprite(new Sprite ("resources/sprites/scientist.png"));
+		this.useSpriteHitbox();
 		l = new Light ();
 	}
 	

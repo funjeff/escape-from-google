@@ -16,6 +16,7 @@ public class Robot extends GameObject {
 	boolean learnedButtons = true;
 	boolean learnedPlant = true;
 	boolean learnedLadder = true;
+	boolean learnedGrab = true;
 	
 	
 	boolean crouching = false;
@@ -42,6 +43,10 @@ public class Robot extends GameObject {
 		
 		if (this.isColliding("Ladder") && GameCode.keyCheck('W', this)) {
 			this.goY(this.getY() -3);
+			vy = 0;
+		}
+		
+		if (this.isColliding("grabableCeiling") && GameCode.keyCheck('W', this)) {
 			vy = 0;
 		}
 		
@@ -115,4 +120,34 @@ public class Robot extends GameObject {
 		}
 	
 	}
+	
+	
+	public void unlockMovement () {
+		learnedMovement = true;
+	}
+	
+	public void unlockJump () {
+		learnedJump = true;
+	}
+	
+	public void unlockDuck () {
+		learnedDuck = true;
+	}
+	
+	public void unlockButtons () {
+		learnedButtons = true;
+	}
+	
+	public void unlockPlant () {
+		learnedPlant = true;
+	}
+	
+	public void unlockLadder () {
+		learnedLadder = true;
+	}
+	
+	public void unlockGrab () {
+		learnedGrab = true;
+	}
+	
 }
