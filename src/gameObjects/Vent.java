@@ -16,6 +16,7 @@ public class Vent extends GameObject {
 	}
 	
 	public void doLoad () {
+		System.out.println (dest);
 		if (!dest.equals ("")) {
 			Room.loadRoom (dest);
 			Room.forceView (0, 0);
@@ -24,9 +25,11 @@ public class Vent extends GameObject {
 	
 	@Override
 	public void frameEvent () {
+		if (Room.getRoomName ().equals ("resources/mapdata/lab.tmj")) {
+			dest = "resources/mapdata/office_map.tmj";
+		}
 		if (Room.getRoomName ().equals ("resources/mapdata/final_level.tmj")) {
 			setHitboxAttributes (-8, -8, 1000, 48);
-			dest = "resources/mapdata/office_map.tmj";
 		}
 	}
 

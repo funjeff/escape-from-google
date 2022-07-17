@@ -1,6 +1,7 @@
 package gameObjects;
 
 import engine.GameObject;
+import map.Room;
 
 public class PipeEntrance extends GameObject {
 	
@@ -27,6 +28,9 @@ public class PipeEntrance extends GameObject {
 		} else if (mode == 1) {
 			r.setY (r.getY () + 1);
 			time++;
+			if (time > 64) {
+				Room.loadRoom ("resources/mapdata/final_level.tmj");
+			}
 		}
 		
 	}

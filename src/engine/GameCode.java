@@ -64,11 +64,6 @@ public class GameCode {
 		
 		s.play("resources/escape from google.wav", 6F);
 		//Test
-		//FullCrate f = (FullCrate)ObjectHandler.getObjectsByName("FullCrate").get(0);
-
-		//f.setRenderPriority(20);
-		
-		//f.open();
 
 		
 		//openCrate();
@@ -105,10 +100,10 @@ public class GameCode {
 		
 		//Test
         Setup.initAll();
-		Room.loadRoom ("resources/mapdata/final_level.tmj");
+		Room.loadRoom ("resources/mapdata/lab.tmj");
 		
 		Room.setView(0, 79);
-		//openCrate();
+		openCrate();
 	}
 		
 	public static void openCrate() {
