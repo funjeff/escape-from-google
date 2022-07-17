@@ -57,14 +57,18 @@ public class Robot extends GameObject {
 		this.setSprite(IDLE_SPRITE);
 		this.setHitbox(0,0,this.getSprite().getWidth(),this.getSprite().getHeight());
 		this.getAnimationHandler().setFrameTime(100);
+<<<<<<< HEAD
 		this.setRenderPriority(1);
+=======
+		setRenderPriority (1);
+>>>>>>> 8d0cd0a12a05299c14d24f9696c2b4cf0aa9d1f6
 	}
 	
 	public void breakBot () {
 		breakTimer = 100;
 		setSprite (ROBOT_BREAK);
-		setX (getX () - 32);
-		setY (getY () - 16);
+		setX (getX () - 16);
+		setY (getY () + 6);
 		clawMode ();
 	}
 	
@@ -87,8 +91,8 @@ public class Robot extends GameObject {
 			breakTimer--;
 			if (breakTimer == 0) {
 				setSprite (IDLE_SPRITE);
-				setX (getX () + 32);
-				setY (getY () + 16);
+				setX (getX () + 16);
+				setY (getY () - 6);
 				unclawMode ();
 			}
 		}
@@ -106,7 +110,6 @@ public class Robot extends GameObject {
 				learnedPlant = true;
 				learnedLadder = true;
 				learnedGrab = true;
-				learnedSUS = true;
 			}
 			if (Room.getRoomName ().equals ("resources/mapdata/final_level.tmj")) {
 				//No starting skills
