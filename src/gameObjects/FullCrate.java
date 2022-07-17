@@ -28,7 +28,6 @@ public class FullCrate extends GameObject {
 				Robot r = new Robot ();
 				r.setRenderPriority(21);
 				r.declare(getX () + 27, getY ());
-
 				this.empty();
 			}
 			

@@ -15,6 +15,8 @@ public class Robot extends GameObject {
 	public static final Sprite IDLE_CROUCH_SPRITE = new Sprite ("resources/sprites/config/robotCrouchIdle.txt");
 	public static final Sprite WALK_CROUCH_SPRITE = new Sprite ("resources/sprites/config/robotCrouchWalk.txt");
 	
+	public static final Sprite ROBOT_BREAK = new Sprite ("resources/sprites/config/robotBreak.txt");
+	
 	
 	double vy = 0;
 	
@@ -29,28 +31,38 @@ public class Robot extends GameObject {
 	boolean learnedSUS= false;
 	*/
 	
-	boolean learnedMovement = true;
-	boolean learnedJump = true;
-	boolean learnedDuck = true;
-	boolean learnedButtons = true;
-	boolean learnedPlant = true;
+	boolean learnedMovement = false;
+	boolean learnedJump = false;
+	boolean learnedDuck = false;
+	boolean learnedButtons = false;
+	boolean learnedPlant = false;
 	boolean clawMode = false;
-	boolean learnedLadder = true;
-	boolean learnedGrab = true;
+	boolean learnedLadder = false;
+	boolean learnedGrab = false;
 	boolean learnedSUS = false;
 	boolean learnedPush = false;
 	boolean learnedFire = false;
-	boolean learnedFire2 = true;
+	boolean learnedFire2 = false;
 	boolean learnedPipe = false;
 	boolean crouching = false;
 	boolean onLadder = false;
 	
 	boolean first = true;
 	
+	int breakTimer = 0;
+	
 	public Robot () {
 		this.setSprite(IDLE_SPRITE);
 		this.setHitbox(0,0,this.getSprite().getWidth(),this.getSprite().getHeight());
 		this.getAnimationHandler().setFrameTime(100);
+	}
+	
+	public void breakBot () {
+		breakTimer = 100;
+		setSprite (ROBOT_BREAK);
+		setX (getX () - 32);
+		setY (getY () - 16);
+		clawMode ();
 	}
 	
 	@Override
@@ -61,9 +73,33 @@ public class Robot extends GameObject {
 	@Override
 	public void frameEvent () {
 		
+		if (breakTimer > 0) {
+			breakTimer--;
+			if (breakTimer == 0) {
+				setSprite (IDLE_SPRITE);
+				setX (getX () + 32);
+				setY (getY () + 16);
+				unclawMode ();
+			}
+		}
+		
 		//Map-specific initialization
 		if (first) {
+			if (Room.getRoomName ().equals ("resources/mapdata/lab.tmj")) {
+				//No starting skills
+			}
+			if (Room.getRoomName ().equals ("resources/mapdata/office_map.tmj")) {
+				learnedMovement = true;
+				learnedJump = true;
+				learnedDuck = true;
+				learnedButtons = true;
+				learnedPlant = true;
+				learnedLadder = true;
+				learnedGrab = true;
+				learnedSUS = true;
+			}
 			if (Room.getRoomName ().equals ("resources/mapdata/final_level.tmj")) {
+				//No starting skills
 				Room.forceView (Room.getViewXAcurate () + 400, Room.getViewYAcurate ());
 			}
 			first = false;
@@ -80,7 +116,6 @@ public class Robot extends GameObject {
 		if (Room.getRoomName ().equals ("resources/mapdata/final_level.tmj")) {
 			if (learnedSUS) {
 				if (isColliding ("Vent")) {
-					System.out.println ("HIA!");
 					this.hide ();
 				} else {
 					this.show ();
