@@ -30,7 +30,6 @@ public class Plant extends EnterableObject {
 		this.setSprite(J_IDLE);
 		this.getAnimationHandler().setFrameTime(40);
 		this.setHitboxAttributes(0,18,16,30);
-		this.adjustHitboxBorders();
 	}
 	public boolean isExposed() {
 		return !this.isBroken && !(this.getSprite().equals(J_IDLE));

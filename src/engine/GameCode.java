@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import gameObjects.ScanReigon;
 import gameObjects.TV;
 import gameObjects.Table;
+import gameObjects.TitleScreen;
 import gameObjects.WaterCooler;
 import gameObjects.Claw;
 import gameObjects.Desk;
@@ -57,11 +58,11 @@ public class GameCode {
 			}
 			s = new SoundPlayer();
 		
-		//Test
-        Setup.initAll();
-		Room.loadRoom ("resources/mapdata/endCutsceen.tmj");
 		
-		Room.setView(0, 79);
+		TitleScreen t = new TitleScreen();
+		t.declare(0, 0);
+		
+		s.play("resources/escape from google.wav", 6F);
 		
 		//openCrate();
 
@@ -91,6 +92,16 @@ public class GameCode {
 		//Room2 room2 = new Room2 ();
 		//room2.loadMap ("big_test.tmj");
 
+	}
+	
+	public static void realInit () {
+		
+		//Test
+        Setup.initAll();
+		Room.loadRoom ("resources/mapdata/lab.tmj");
+		
+		Room.setView(0, 79);
+		openCrate();
 	}
 		
 	public static void openCrate() {

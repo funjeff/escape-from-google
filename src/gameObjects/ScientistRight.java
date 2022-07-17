@@ -58,7 +58,6 @@ public class ScientistRight extends GameObject{
 	private class Light extends GameObject {
 		int height = 240;
 		public Light () {
-			this.adjustHitboxBorders();
 			this.setSprite(new Sprite ("resources/sprites/Light.png"));
 			this.enablePixelCollisions();
 			this.getAnimationHandler().setFrameTime(250);

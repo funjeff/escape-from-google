@@ -44,7 +44,6 @@ public class Robot extends GameObject {
 	public Robot () {
 		this.setSprite(IDLE_SPRITE);
 		this.setHitbox(0,0,this.getSprite().getWidth(),this.getSprite().getHeight());
-		this.adjustHitboxBorders();
 		this.getAnimationHandler().setFrameTime(100);
 	}
 	

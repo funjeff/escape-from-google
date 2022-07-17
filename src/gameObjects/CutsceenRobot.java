@@ -24,7 +24,6 @@ public class CutsceenRobot extends GameObject{
 		GameCode.getSoundPlayer().play("resources/moon.wav", 6F);
 		
 		this.useSpriteHitbox();
-		this.adjustHitboxBorders();
 	}
 	
 	@Override
