@@ -32,6 +32,7 @@ public class GameCode {
 
 	static ArrayList <Asker> askers = new ArrayList <Asker> ();
 	
+	static SoundPlayer s;
 
 
 	public static void testBitch () {
@@ -49,17 +50,21 @@ public class GameCode {
 
 	public static void init () {
 		
+		try {
+			s.stop();
+			} catch (NullPointerException e) {
+				
+			}
+			s = new SoundPlayer();
+		
 		//Test
         Setup.initAll();
-		Room.loadRoom ("resources/mapdata/lab.tmj");
+		Room.loadRoom ("resources/mapdata/endCutsceen.tmj");
 		
 		Room.setView(0, 79);
-		FullCrate f = (FullCrate)ObjectHandler.getObjectsByName("FullCrate").get(0);
+		
+		//openCrate();
 
-		f.setRenderPriority(20);
-		
-		f.open();
-		
 //		ScanReigon r = new ScanReigon (null);
 //		r.setRadius (40);
 //		r.setTitleText ("HELLO");
@@ -88,6 +93,26 @@ public class GameCode {
 
 	}
 		
+	public static void openCrate() {
+			FullCrate f = (FullCrate)ObjectHandler.getObjectsByName("FullCrate").get(0);
+	//
+			f.setRenderPriority(20);
+	//		
+			f.open();
+	}
+	
+	public static void resetSounds() {
+		try {
+			s.stop();
+		} catch (NullPointerException e) {
+		
+		}
+		s = new SoundPlayer();
+	}
+	public static SoundPlayer getSoundPlayer () {
+		return s;
+	}
+	
 	public static void resetGame () {
 		
 		
