@@ -51,7 +51,7 @@ public class GameCode {
 		
 		//Test
         Setup.initAll();
-    	Room.loadRoom ("resources/mapdata/lab.tmj");
+		Room.loadRoom ("resources/mapdata/lab.tmj");
 		
 		Room.setView(0, 79);
 		FullCrate f = (FullCrate)ObjectHandler.getObjectsByName("FullCrate").get(0);
