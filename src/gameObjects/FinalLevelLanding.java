@@ -25,14 +25,14 @@ public class FinalLevelLanding extends GameObject {
 				claw.declare ();
 				claw.setX (getX ());
 				claw.setY (getY () - 600);
-				claw.destination = new Vector2D (1760, 1216);
+				claw.destination = new Vector2D (1744, 1216);
 				first = false;
 				Robot r = (Robot)getCollisionInfo ().getCollidingObjects ().get (0);
 				r.breakBot ();
 			} else if (enter) {
 				claw.setX (getX ());
 				claw.setY (getY () - 600);
-				claw.destination = new Vector2D (1760, 1216);
+				claw.destination = new Vector2D (1744, 1216);
 			}
 		} else {
 			was = false;
