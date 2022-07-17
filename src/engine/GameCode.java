@@ -197,15 +197,6 @@ public class GameCode {
 		return RenderLoop.wind.getResolution()[1];
 	}
 
-	public static int getViewY() {
-		return veiwY;
-	}
-
-
-
-	public static void setViewY(int newVeiwY) {
-		veiwY = newVeiwY;
-	}
 	
 	public static void setScanMode (boolean scanMode) {
 		if (scanMode) {
