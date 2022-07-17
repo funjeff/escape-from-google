@@ -27,7 +27,7 @@ public class FullCrate extends GameObject {
 			if (openTimer == 50) {
 				Robot r = new Robot ();
 				r.setRenderPriority(21);
-				r.declare(3000, 280);
+				r.declare(getX () + 27, getY ());
 
 				this.empty();
 			}

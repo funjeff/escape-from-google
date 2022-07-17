@@ -15,6 +15,7 @@ public class LadderGuy extends GameObject implements Scannable{
 	public LadderGuy () {
 		this.setSprite(new Sprite ("resources/sprites/scientistClimb.png"));
 		this.useSpriteHitbox();
+		this.setRenderPriority(100);
 	}
 	
 	@Override
