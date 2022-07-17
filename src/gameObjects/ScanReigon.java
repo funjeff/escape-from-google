@@ -86,6 +86,7 @@ public class ScanReigon extends GameObject {
 					MouseEvent curr = events.get (i);
 					if (curr.getID () == MouseEvent.MOUSE_CLICKED && curr.getButton () == MouseEvent.BUTTON1) {
 						learned = true;
+						GameCode.getSoundPlayer().playSoundEffect(6F, "resources/scan.wav");
 					}
 				}
 				isActive = true;

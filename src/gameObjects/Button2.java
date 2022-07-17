@@ -1,5 +1,6 @@
 package gameObjects;
 
+import engine.GameCode;
 import engine.GameObject;
 import engine.Sprite;
 
@@ -20,6 +21,7 @@ public class Button2 extends GameObject {
 	}
 	
 	public void pushButton() {
+		GameCode.getSoundPlayer().playSoundEffect(6F, "resources/buttonChime.wav");
 		d.open();
 	}
 

@@ -1,5 +1,6 @@
 package gameObjects;
 
+import engine.GameCode;
 import engine.GameObject;
 import engine.ObjectHandler;
 import engine.Sprite;
@@ -19,6 +20,7 @@ public class Button4 extends GameObject {
 	}
 	
 	public void pushButton() {
+		GameCode.getSoundPlayer().playSoundEffect(6F, "resources/buttonChime.wav");
 		Claw claw = (Claw)ObjectHandler.getObjectsByName ("Claw").get (0);
 		claw.setX (getX () - 576);
 		claw.setY (getY () - 300);

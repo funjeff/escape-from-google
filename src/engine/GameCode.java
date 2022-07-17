@@ -2,6 +2,8 @@ package engine;
 
 import java.util.ArrayList;
 
+import javax.sound.sampled.FloatControl;
+
 import gameObjects.ScanReigon;
 import gameObjects.TV;
 import gameObjects.Table;
@@ -104,6 +106,8 @@ public class GameCode {
 		
 		Room.setView(0, 79);
 	//	openCrate();
+
+
 	}
 		
 	public static void openCrate() {
