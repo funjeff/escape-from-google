@@ -1,10 +1,11 @@
 package gameObjects;
 
 import engine.GameObject;
+import engine.ObjectHandler;
 import engine.Sprite;
 import map.Room;
 
-public class TV extends GameObject {
+public class TV extends GameObject implements Scannable {
 	
 	public static Sprite tvSpr = new Sprite ("resources/sprites/tv.png");
 	public static Sprite marcusSpr = new Sprite ("resources/sprites/marcus.png");
@@ -15,6 +16,19 @@ public class TV extends GameObject {
 	@Override
 	public void frameEvent () {
 		time++;
+	}
+	
+	@Override
+	public void onDeclare () {
+		this.setHitboxAttributes (0, 0, 52, 32);
+		ScanReigon r = new ScanReigon (this);
+		r.declare (getX (), getY ());
+		r.setRadius (40);
+		r.setTitleText ("\"Marcus\" the plumber");
+		r.setDescText (new String[] {
+					"Marcus can duck with S",
+					"to enter pipes."
+		});
 	}
 	
 	@Override
@@ -47,6 +61,11 @@ public class TV extends GameObject {
 		tvSpr.draw (drawX, drawY);
 		marcusSpr.draw (drawX + 36 - (int)offsX, drawY + 22 - (int)offsY);
 		bongSpr.draw (drawX + 6, drawY + 20);
+	}
+
+	@Override
+	public void scanCompleteAction () {
+		((Robot)ObjectHandler.getObjectsByName ("Robot").get (0)).learnedPipe = true;
 	}
 
 }

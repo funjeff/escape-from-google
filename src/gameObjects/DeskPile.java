@@ -18,6 +18,7 @@ public class DeskPile extends GameObject {
 	
 	public DeskPile () {
 		setSprite (deskSpr);
+		setHitboxAttributes (71, 45);
 	}
 	
 	public void burn () {
@@ -32,11 +33,12 @@ public class DeskPile extends GameObject {
 	
 	@Override
 	public void frameEvent () {
-		if (this.keyDown ('F') && !isBurning) {
+		if (this.isColliding ("Fireball") && !isBurning) {
 			burn ();
 			this.setY (this.getY () - 15);
 			this.setX (this.getX () - 4);
 			isBurning = true;
+			this.getCollisionInfo ().getCollidingObjects ().get (0).forget ();
 		}
 		if (isBurning) {
 			if (smokeTimer == 0) {

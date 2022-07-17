@@ -51,14 +51,14 @@ public class GameCode {
 		
 		//Test
         Setup.initAll();
-		Room.loadRoom ("resources/mapdata/lab.tmj");
+		Room.loadRoom ("resources/mapdata/final_level.tmj");
 		
 		Room.setView(0, 79);
-		FullCrate f = (FullCrate)ObjectHandler.getObjectsByName("FullCrate").get(0);
+		//FullCrate f = (FullCrate)ObjectHandler.getObjectsByName("FullCrate").get(0);
 
-		f.setRenderPriority(20);
+		//f.setRenderPriority(20);
 		
-		f.open();
+		//f.open();
 		
 //		ScanReigon r = new ScanReigon (null);
 //		r.setRadius (40);

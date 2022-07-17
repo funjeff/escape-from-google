@@ -853,6 +853,13 @@ public static MapTile[] getAllCollidingTiles (GameObject obj) {
 		updateY = y;
 	}
 	
+	public static void forceView (int x, int y) {
+		updateX = x;
+		updateY = y;
+		scrollX = x;
+		scrollY = y;
+	}
+	
 	/**
 	 * returns what point of the map the leftmost edge of the screen is on
 	 * @return the x coordinate of the viewport

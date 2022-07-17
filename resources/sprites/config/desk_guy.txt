@@ -1,0 +1,3 @@
+$src resources/sprites/desk_guy.png
+
+grid 64 32
