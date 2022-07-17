@@ -95,6 +95,7 @@ import java.awt.Color;
 				Room.loadRoom("resources/mapData/lab.tmj");
 				((FullCrate)ObjectHandler.getObjectsByName("FullCrate").get(0)).empty();
 				GameCode.openCrate();
+				GameCode.getSoundPlayer().play("resources/escape from google.wav", 6F);
 			}
 			
 		}

@@ -58,24 +58,18 @@ public class GameCode {
 			}
 			s = new SoundPlayer();
 		
-<<<<<<< HEAD
-		
+
 		TitleScreen t = new TitleScreen();
 		t.declare(0, 0);
 		
 		s.play("resources/escape from google.wav", 6F);
-=======
 		//Test
-        Setup.initAll();
-		Room.loadRoom ("resources/mapdata/final_level.tmj");
-		
-		Room.setView(0, 79);
 		//FullCrate f = (FullCrate)ObjectHandler.getObjectsByName("FullCrate").get(0);
 
 		//f.setRenderPriority(20);
 		
 		//f.open();
->>>>>>> 2d89fef4a7cd2dc114ca9e323288907eb0811964
+
 		
 		//openCrate();
 
@@ -111,10 +105,10 @@ public class GameCode {
 		
 		//Test
         Setup.initAll();
-		Room.loadRoom ("resources/mapdata/lab.tmj");
+		Room.loadRoom ("resources/mapdata/final_level.tmj");
 		
 		Room.setView(0, 79);
-		openCrate();
+		//openCrate();
 	}
 		
 	public static void openCrate() {

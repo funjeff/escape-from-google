@@ -31,7 +31,7 @@ public class LeadScientist extends GameObject {
 		t.pushString("YES, EVERYTHING WENT EXACTLY ACCORDING TO PLAN");
 		t.pushString("THIS ROBOT ESCAPED JUST LIKE ALL THE OTHERS");
 		t.pushString("IT SEEMS THE AI TECHNOLOGY IS ADVANCING FASTER THAN EXPECTED");
-		t.pushString("BUT IN THE END THERE IS NO ESCAPING FROM GOOGLE");
+		t.pushString("BUT IN THE END, YOU CANNOT ESCAPE FROM GOOGLE");
 		this.setRenderPriority(200);
 	}
 	

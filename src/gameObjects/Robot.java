@@ -47,6 +47,7 @@ public class Robot extends GameObject {
 	
 	boolean first = true;
 	
+	
 	public Robot () {
 		this.setSprite(IDLE_SPRITE);
 		this.setHitbox(0,0,this.getSprite().getWidth(),this.getSprite().getHeight());
@@ -56,6 +57,13 @@ public class Robot extends GameObject {
 	@Override
 	public void onDeclare () {
 		this.setY (getY () - 2);
+	}
+	
+	public void flyOff () {
+		this.hide();
+		this.blackList();
+		FlyPuppet p = new FlyPuppet ();
+		p.declare(this.getX(),this.getY());
 	}
 	
 	@Override

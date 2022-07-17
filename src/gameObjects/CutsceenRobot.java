@@ -12,6 +12,8 @@ public class CutsceenRobot extends GameObject{
 	
 	int timer = 0;
 	
+	boolean inzialized = false;
+	
 	public static final Sprite POWER_DOWN = new Sprite ("resources/sprites/config/robotPowerDown.txt");
 	public static final Sprite DRAMATIC_FALL = new Sprite ("resources/sprites/config/robotFall.txt");
 	
@@ -21,6 +23,10 @@ public class CutsceenRobot extends GameObject{
 	public CutsceenRobot () {
 		this.setSprite(new Sprite ("resources/sprites/config/jetpackRobot.txt"));
 		this.getAnimationHandler().setFrameTime(100);
+		try {
+			GameCode.getSoundPlayer().stop();
+			} catch (NullPointerException e) {
+			}
 		GameCode.getSoundPlayer().play("resources/moon.wav", 6F);
 		
 		this.useSpriteHitbox();
@@ -28,6 +34,11 @@ public class CutsceenRobot extends GameObject{
 	
 	@Override
 	public void frameEvent () {
+		
+		if (!inzialized) {
+			Room.forceView((int)this.getX() - 480, (int)this.getY() - 280);
+			inzialized = true;
+		}
 		if (!falling && !broken) {
 			this.setX(this.getX() + 10);
 			Room.setView(Room.getViewX() + 10, Room.getViewY());			
@@ -81,4 +92,6 @@ public class CutsceenRobot extends GameObject{
 		}
 		
 	}
+	
+	
 }
