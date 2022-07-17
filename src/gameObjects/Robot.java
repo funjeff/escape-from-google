@@ -37,9 +37,15 @@ public class Robot extends GameObject {
 	boolean clawMode = false;
 	boolean learnedLadder = true;
 	boolean learnedGrab = true;
-	boolean learnedSUS= true;
+	boolean learnedSUS = false;
+	boolean learnedPush = false;
+	boolean learnedFire = false;
+	boolean learnedFire2 = true;
+	boolean learnedPipe = false;
 	boolean crouching = false;
 	boolean onLadder = false;
+	
+	boolean first = true;
 	
 	public Robot () {
 		this.setSprite(IDLE_SPRITE);
@@ -48,12 +54,76 @@ public class Robot extends GameObject {
 	}
 	
 	@Override
+	public void onDeclare () {
+		this.setY (getY () - 2);
+	}
+	
+	@Override
 	public void frameEvent () {
 		
+		//Map-specific initialization
+		if (first) {
+			if (Room.getRoomName ().equals ("resources/mapdata/final_level.tmj")) {
+				Room.forceView (Room.getViewXAcurate () + 400, Room.getViewYAcurate ());
+			}
+			first = false;
+		}
+		
+		//Spikes
+		if (isColliding ("Spikes")) {
+			//1216 1536
+			this.setX (1216);
+			this.setY (1534);
+		}
+		
+		//Venting
+		if (Room.getRoomName ().equals ("resources/mapdata/final_level.tmj")) {
+			if (learnedSUS) {
+				if (isColliding ("Vent")) {
+					System.out.println ("HIA!");
+					this.hide ();
+				} else {
+					this.show ();
+				}
+			} else {
+				if (isColliding ("Vent")) {
+					setX (getX () - 6);
+				}
+			}
+		} else {
+			if (isColliding ("Vent") && learnedSUS) {
+				Vent vent = (Vent)getCollisionInfo ().getCollidingObjects ().get (0);
+				vent.doLoad ();
+				System.out.println (Room.getViewX () + ", " + Room.getViewY ());
+				return;
+			}
+		}
+		
 		if (!clawMode) {
+			
+			if (isColliding ("Claw")) {
+				Claw claw = (Claw)getCollisionInfo ().getCollidingObjects ().get (0);
+				if (claw.mode == 2) {
+					clawMode ();
+				}
+			}
 		
 			if (GameCode.keyPressed('E', this)) {
 				GameCode.setScanMode(true);
+			}
+			boolean fPress = GameCode.keyPressed ('F', this);
+			if (fPress && learnedFire) {
+				boolean flip = this.getAnimationHandler ().flipHorizontal ();
+				Fireball fb = new Fireball ();
+				fb.setDir (flip);
+				fb.declare (getX () + (flip ? -32 : 32), getY ());
+			}
+			if (fPress && learnedFire2) {
+				System.out.println("HIA");
+				boolean flip = this.getAnimationHandler ().flipHorizontal ();
+				Firedball fb = new Firedball ();
+				fb.setDir (flip);
+				fb.declare (getX () + (flip ? -42 : 42), getY () - 12);
 			}
 			
 			boolean falling = false;
@@ -93,11 +163,16 @@ public class Robot extends GameObject {
 				p.declare(this.getX(), this.getY() + 16);
 			}
 			
-			if ((this.isColliding("Button1") || this.isColliding("Button2")) && GameCode.keyPressed(KeyEvent.VK_ENTER, this) && learnedButtons) {
-				try {
-					((Button1)this.getCollisionInfo().getCollidingObjects().get(0)).pushButton();
-				} catch (ClassCastException e) {
-					((Button2)this.getCollisionInfo().getCollidingObjects().get(0)).pushButton();
+			if ((this.isColliding("Button1") || this.isColliding("Button2") || this.isColliding ("Button3") || this.isColliding ("Button4")) && GameCode.keyPressed(KeyEvent.VK_ENTER, this) && learnedButtons) {
+				GameObject button = this.getCollisionInfo().getCollidingObjects().get(0);
+				if (button instanceof Button1) {
+					((Button1)button).pushButton();
+				} else if (button instanceof Button2) {
+					((Button2)button).pushButton();
+				} else if (button instanceof Button3) {
+					((Button3)button).pushButton();
+				} else if (button instanceof Button4) {
+					((Button4)button).pushButton();
 				}
 				
 			}
@@ -109,25 +184,28 @@ public class Robot extends GameObject {
 				
 				
 				
-				
-				if (Room.getViewY() + 60 > this.getY()) {
-					if ((int)(Room.getViewY() - (60 - (this.getY() - Room.getViewY()))) > 0) {
-						Room.setView(Room.getViewX(),(int)(Room.getViewY() - (60 - (this.getY() - Room.getViewY()))) );
+				if (Room.getRoomName ().equals ("resources/mapdata/final_level.tmj")) {
+					Room.setView ((int)getX () - 480, (int)getY () - 270);
+				} else {
+					if (Room.getViewY() + 60 > this.getY()) {
+						if ((int)(Room.getViewY() - (60 - (this.getY() - Room.getViewY()))) > 0) {
+							Room.setView(Room.getViewX(),(int)(Room.getViewY() - (60 - (this.getY() - Room.getViewY()))) );
+						}
 					}
-				}
-				
-				if (Room.getViewX() + 150 > this.getX()) {
-					if ((Room.getViewX() - (150 - (this.getX() - Room.getViewX())) > 0)){
-						Room.setView((int)(Room.getViewX() - (150 - (this.getX() - Room.getViewX()))), Room.getViewY() );
+					
+					if (Room.getViewX() + 150 > this.getX()) {
+						if ((Room.getViewX() - (150 - (this.getX() - Room.getViewX())) > 0)){
+							Room.setView((int)(Room.getViewX() - (150 - (this.getX() - Room.getViewX()))), Room.getViewY() );
+						}
 					}
-				}
-				
-				if (Room.getViewY() + 460 < this.getY()) {
-					Room.setView(Room.getViewX(),(int)(this.getY() - 460));
-				}
-				
-				if (Room.getViewX() + 725 < this.getX()) {
-					Room.setView((int)(this.getX() - 725), Room.getViewY());
+					
+					if (Room.getViewY() + 460 < this.getY()) {
+						Room.setView(Room.getViewX(),(int)(this.getY() - 460));
+					}
+					
+					if (Room.getViewX() + 725 < this.getX()) {
+						Room.setView((int)(this.getX() - 725), Room.getViewY());
+					}
 				}
 				
 				
@@ -197,21 +275,30 @@ public class Robot extends GameObject {
 		double startX = getX ();
 		setX (x);
 		if (this.isColliding ("Desk")) {
-			ArrayList<GameObject> desks = this.getCollisionInfo ().getCollidingObjects ();
-			for (int i = 0; i < desks.size (); i++) {
-				Desk curr = (Desk)desks.get (i);
-				if ((getX () < curr.getX () && x < startX) || getX () > curr.getX () && x > startX) {
-					
-				} else {
-					if (!(curr.goX (curr.getX () + (x - startX)))) {
-						setX (startX);
-						return false;
+			if (learnedPush) {
+				ArrayList<GameObject> desks = this.getCollisionInfo ().getCollidingObjects ();
+				for (int i = 0; i < desks.size (); i++) {
+					Desk curr = (Desk)desks.get (i);
+					if ((getX () < curr.getX () && x < startX) || getX () > curr.getX () && x > startX) {
+						
+					} else {
+						if (!(curr.goX (curr.getX () + (x - startX)))) {
+							setX (startX);
+							return false;
+						}
 					}
 				}
+			} else {
+				setX (startX);
+				return false;
 			}
 			setX (startX);
 		}
 		if (this.isColliding ("WaterCooler")) {
+			setX (startX);
+			return false;
+		}
+		if (this.isColliding ("Bouncer")) {
 			setX (startX);
 			return false;
 		}

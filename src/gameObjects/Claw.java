@@ -50,9 +50,11 @@ public class Claw extends GameObject {
 				if (isColliding ("Robot")) {
 					mode = 2;
 					modeTime = 0;
-				} else {
-					mode = 5;
 				}
+			}
+			if (time > 2000) {
+				mode = 5;
+				time = 0;
 			}
 		}
 		
@@ -82,6 +84,9 @@ public class Claw extends GameObject {
 			if (dist < 5) { //CLOSENESS CONSTANT FOR STOPPING
 				mode = 4;
 				modeTime = 0;
+			}
+			if (Room.getRoomName ().equals ("resources/mapdata/final_level.tmj")) {
+				Room.setView ((int)getX () - 480, (int)getY () - 270);
 			}
 		}
 		
