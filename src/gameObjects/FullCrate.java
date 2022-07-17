@@ -1,5 +1,6 @@
 package gameObjects;
 
+import engine.GameCode;
 import engine.GameObject;
 import engine.Sprite;
 
@@ -36,6 +37,7 @@ public class FullCrate extends GameObject {
 				this.setY(ogY);
 			} else {
 				if (openTimer % 4 == 0) {
+					GameCode.getSoundPlayer().playSoundEffect(6F,"resources/knock.wav");
 					this.goXandY(this.getX() + ((Math.random()*2 * openTimer) - openTimer),this.getY() + ((Math.random()*2 * openTimer) - openTimer) );	
 				}
 			}

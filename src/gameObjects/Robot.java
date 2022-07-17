@@ -57,6 +57,7 @@ public class Robot extends GameObject {
 		this.setSprite(IDLE_SPRITE);
 		this.setHitbox(0,0,this.getSprite().getWidth(),this.getSprite().getHeight());
 		this.getAnimationHandler().setFrameTime(100);
+		this.setRenderPriority(1);
 	}
 	
 	public void breakBot () {

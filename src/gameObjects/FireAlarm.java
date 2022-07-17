@@ -1,5 +1,6 @@
 package gameObjects;
 
+import engine.GameCode;
 import engine.GameObject;
 import engine.ObjectHandler;
 import engine.Sprite;
@@ -28,6 +29,9 @@ public class FireAlarm extends GameObject {
 				if (time / 15 % 2 == 0) {
 					getAnimationHandler ().setAnimationFrame (0);
 				} else {
+					if (this.getAnimationHandler().getFrame() != 1) {
+						GameCode.getSoundPlayer().playSoundEffect(3F,"resources/fire alram.wav");
+					}	
 					getAnimationHandler ().setAnimationFrame (1);
 				}
 			} else {

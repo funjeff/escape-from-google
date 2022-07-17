@@ -2,6 +2,8 @@ package engine;
 
 import java.util.ArrayList;
 
+import javax.sound.sampled.FloatControl;
+
 import gameObjects.ScanReigon;
 import gameObjects.TV;
 import gameObjects.Table;
@@ -100,10 +102,10 @@ public class GameCode {
 		
 		//Test
         Setup.initAll();
-		Room.loadRoom ("resources/mapdata/lab.tmj");
+		Room.loadRoom ("resources/mapdata/office_map.tmj");
 		
 		Room.setView(0, 79);
-		openCrate();
+		//openCrate();
 	}
 		
 	public static void openCrate() {

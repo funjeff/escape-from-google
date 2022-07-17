@@ -1,5 +1,6 @@
 package gameObjects;
 
+import engine.GameCode;
 import engine.GameObject;
 import map.Room;
 
@@ -20,7 +21,8 @@ public class PipeEntrance extends GameObject {
 		
 		if (mode == 0 && isColliding ("Robot")) {
 			r = (Robot)getCollisionInfo ().getCollidingObjects ().get (0);
-			if (r.crouching) {
+			if (r.crouching && r.learnedPipe) {
+				GameCode.getSoundPlayer().playSoundEffect(6F,"resources/pipe.wav");
 				r.clawMode ();
 				r.setX (getX ());
 				mode = 1;
