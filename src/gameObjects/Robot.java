@@ -53,16 +53,7 @@ public class Robot extends GameObject {
 				p.declare(this.getX(), this.getY() + 16);
 			}
 			
-			if ((this.isColliding("Button1") || this.isColliding("Button2")) || this.isColliding ("Button3") && GameCode.keyPressed(KeyEvent.VK_ENTER, this) && learnedButtons) {
-				GameObject toPush = this.getCollisionInfo().getCollidingObjects().get(0);
-				if (toPush instanceof Button1) {
-					((Button1)toPush).pushButton ();
-				} else if (toPush instanceof Button2) {
-					((Button2)toPush).pushButton ();
-				} else if (toPush instanceof Button3) {
-					((Button3)toPush).pushButton ();
-				}
-			}
+			
 			
 			
 			if (Room.getViewY() + 60 > this.getY()) {

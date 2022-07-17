@@ -12,7 +12,10 @@ import gameObjects.DeskPile;
 import gameObjects.FireAlarm;
 import gameObjects.FireSprinkler;
 import gameObjects.HatRack;
+import gameObjects.FullCrate;
+import gameObjects.GreenFilter;
 import gameObjects.Robot;
+import gameObjects.ScanReigon;
 import map.Room;
 import java.awt.event.KeyEvent;
 
@@ -22,9 +25,10 @@ public class GameCode {
 	
 	static int veiwX;
 	static int veiwY;
-	static boolean isScanMode = true;
+	static boolean isScanMode = false;
 	
-	static Robot r2 = new Robot ();
+	static GreenFilter green = new GreenFilter ();
+	
 
 	static ArrayList <Asker> askers = new ArrayList <Asker> ();
 	
@@ -47,9 +51,40 @@ public class GameCode {
 		
 		//Test
         Setup.initAll();
-		Room.loadRoom ("resources/mapdata/office_map.tmj");
-		r2 = new Robot ();
-		r2.declare(170, 440);
+    	Room.loadRoom ("resources/mapdata/lab.tmj");
+		
+		Room.setView(0, 79);
+		FullCrate f = (FullCrate)ObjectHandler.getObjectsByName("FullCrate").get(0);
+
+		f.setRenderPriority(20);
+		
+		f.open();
+		
+//		ScanReigon r = new ScanReigon (null);
+//		r.setRadius (40);
+//		r.setTitleText ("HELLO");
+//		r.setDescText (new String[] {"DESCRIPTION", "TEXT"});
+//		r.declare (256, 256);
+	
+	//	Bat b = new Bat();
+	//	b.declare(300,200);
+
+//		CactusDude c = new CactusDude();
+//		c.declare(300,100);
+
+//		Bombhog h = new Bombhog();
+//		h.declare(200,200);
+//		
+//		Heart h = new Heart ();
+//		h.declare(350,250);
+//		
+		
+//		MachineBomber mb = new MachineBomber();
+//		mb.declare(400,200);
+		
+		//Test
+		//Room2 room2 = new Room2 ();
+		//room2.loadMap ("big_test.tmj");
 
 	}
 		
@@ -157,7 +192,11 @@ public class GameCode {
 	
 	public static void afterRender()
 	{
-		
+		if (isScanMode()) {
+			green.setX(Room.getViewX());
+			green.setY(Room.getViewY());
+			
+		}
 	}
 		
 	public static int getResolutionX() {
@@ -178,6 +217,13 @@ public class GameCode {
 	}
 	
 	public static void setScanMode (boolean scanMode) {
+		if (scanMode) {
+			ObjectHandler.pause(true);
+			green.declare();
+		} else {
+			ObjectHandler.pause(false);
+			green.forget();
+		}
 		isScanMode = scanMode;
 	}
 	

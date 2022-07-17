@@ -242,7 +242,9 @@ public class ObjectHandler {
 					// but this line prevents that 
 					// moral of the story DON'T DELETE it it took me forever to figure this stupid bug out and I don't want you (me) to suffer the same fate
 					if (allObjsArray[i].declared()) {
-						allObjsArray [i].frameEvent ();
+						if (!allObjsArray[i].isBlackListed()) {
+							allObjsArray [i].frameEvent ();
+						}
 					}
 				} else {
 					if (allObjsArray[i].declared()) {
@@ -339,7 +341,7 @@ public class ObjectHandler {
 		try {
 			return (GameObject)c.getConstructor().newInstance();
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			return null;
 		}
 	}

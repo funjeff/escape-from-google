@@ -6,20 +6,23 @@ import engine.Sprite;
 
 public class Door extends GameObject {
 	
+	int curFrame = 0;
+	
 	public Door () {
-		this.setSprite(new Sprite ("resources/sprites/door.png"));
-		this.setHitboxAttributes(0, 0,23, 53);
-		this.adjustHitboxBorders();
+	
 	}
 	
 	public void open() {
-		this.forget();
+		this.getAnimationHandler().setFrameTime(100);
 	
 	}
 	
 	@Override
 	public void frameEvent () {
 		
+		if (this.getAnimationHandler().getFrame() == 9) {
+			this.forget();
+		}
 	}
 	
 	

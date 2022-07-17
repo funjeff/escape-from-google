@@ -45,6 +45,28 @@ public class Plant extends EnterableObject {
 			}
 			this.goY(this.getY() + 2);
 			if (inPot) {
+				
+				if (Room.getViewY() + 60 > this.getY()) {
+					if ((int)(Room.getViewY() - (60 - (this.getY() - Room.getViewY()))) > 0) {
+						Room.setView(Room.getViewX(),(int)(Room.getViewY() - (60 - (this.getY() - Room.getViewY()))) );
+					}
+				}
+				
+				if (Room.getViewX() + 150 > this.getX()) {
+					if ((Room.getViewX() - (150 - (this.getX() - Room.getViewX())) > 0)){
+						Room.setView((int)(Room.getViewX() - (150 - (this.getX() - Room.getViewX()))), Room.getViewY() );
+					}
+				}
+				
+				if (Room.getViewY() + 460 < this.getY()) {
+					Room.setView(Room.getViewX(),(int)(this.getY() - 460));
+				}
+				
+				if (Room.getViewX() + 725 < this.getX()) {
+					Room.setView((int)(this.getX() - 725), Room.getViewY());
+				}
+				
+				
 				if (keyDown('D') || keyDown ('A')) {
 					if (!(this.getSprite().equals(J_UP) || this.getSprite().equals(J_WALK))) {
 							this.setSprite(J_UP);
