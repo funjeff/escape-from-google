@@ -758,6 +758,7 @@ public static MapTile[] getAllCollidingTiles (GameObject obj) {
 			File f = new File (tileset.getString ("image"));
 			System.out.println (f.getName ());
 			String tileId = f.getName ().split ("\\.")[0];
+			System.out.println (f.getName ());
 			Sprite tilesImg = new Sprite ("resources/mapdata/" + f.getName ());
 			BufferedImage rawImg = tilesImg.getFrame (0);
 			int tileCount = tileset.getInt ("tilecount");

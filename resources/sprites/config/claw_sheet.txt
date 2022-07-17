@@ -1,0 +1,2 @@
+$src resources/sprites/claw_sheet.png
+grid 32 32;

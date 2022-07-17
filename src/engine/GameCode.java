@@ -3,6 +3,15 @@ package engine;
 import java.util.ArrayList;
 
 import gameObjects.ScanReigon;
+import gameObjects.TV;
+import gameObjects.Table;
+import gameObjects.WaterCooler;
+import gameObjects.Claw;
+import gameObjects.Desk;
+import gameObjects.DeskPile;
+import gameObjects.FireAlarm;
+import gameObjects.FireSprinkler;
+import gameObjects.HatRack;
 import gameObjects.Robot;
 import map.Room;
 import java.awt.event.KeyEvent;
@@ -38,34 +47,9 @@ public class GameCode {
 		
 		//Test
         Setup.initAll();
-		Room.loadRoom ("resources/mapdata/lab.tmj");
-		ScanReigon r = new ScanReigon (null);
-		r.setRadius (40);
-		r.setTitleText ("HELLO");
-		r.setDescText (new String[] {"DESCRIPTION", "TEXT"});
-		r.declare (256, 256);
+		Room.loadRoom ("resources/mapdata/office_map.tmj");
 		r2 = new Robot ();
 		r2.declare(170, 440);
-		
-	//	Bat b = new Bat();
-	//	b.declare(300,200);
-
-//		CactusDude c = new CactusDude();
-//		c.declare(300,100);
-
-//		Bombhog h = new Bombhog();
-//		h.declare(200,200);
-//		
-//		Heart h = new Heart ();
-//		h.declare(350,250);
-//		
-		
-//		MachineBomber mb = new MachineBomber();
-//		mb.declare(400,200);
-		
-		//Test
-		//Room2 room2 = new Room2 ();
-		//room2.loadMap ("big_test.tmj");
 
 	}
 		
@@ -163,8 +147,8 @@ public class GameCode {
 	
 	
 	public static void renderFunc () {
-		ObjectHandler.renderAll();
 		Room.render();
+		ObjectHandler.renderAll();
 	}
 	
 	public static void beforeRender() {

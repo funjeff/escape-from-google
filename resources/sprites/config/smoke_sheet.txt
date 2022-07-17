@@ -1,0 +1,2 @@
+$src resources/sprites/smoke_sheet.png
+grid 32 32;

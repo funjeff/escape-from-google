@@ -1,0 +1,2 @@
+$src resources/sprites/fire_alarm.png
+grid 32 32;

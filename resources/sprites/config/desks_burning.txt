@@ -1,0 +1,2 @@
+$src resources/sprites/desks_burning.png
+grid 80 60;
