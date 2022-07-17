@@ -2,6 +2,16 @@ package engine;
 
 import java.util.ArrayList;
 
+import gameObjects.ScanReigon;
+import gameObjects.TV;
+import gameObjects.Table;
+import gameObjects.WaterCooler;
+import gameObjects.Claw;
+import gameObjects.Desk;
+import gameObjects.DeskPile;
+import gameObjects.FireAlarm;
+import gameObjects.FireSprinkler;
+import gameObjects.HatRack;
 import gameObjects.FullCrate;
 import gameObjects.GreenFilter;
 import gameObjects.Robot;
@@ -174,7 +184,6 @@ public class GameCode {
 	public static void renderFunc () {
 		Room.render();
 		ObjectHandler.renderAll();
-		
 	}
 	
 	public static void beforeRender() {
