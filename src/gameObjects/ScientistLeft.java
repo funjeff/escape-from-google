@@ -6,6 +6,7 @@ import engine.GameObject;
 import engine.Sprite;
 import map.Room;
 
+import java.awt.image.RasterFormatException;
 
 public class ScientistLeft extends GameObject{
 
@@ -15,8 +16,9 @@ public class ScientistLeft extends GameObject{
 	
 	public ScientistLeft () {
 		this.setSprite(new Sprite ("resources/sprites/scientist.png"));
-		this.useSpriteHitbox();
 		l = new Light ();
+		this.getAnimationHandler().setFlipHorizontal(false);
+		this.useSpriteHitbox();
 	}
 	
 	@Override
@@ -24,18 +26,34 @@ public class ScientistLeft extends GameObject{
 		if (walkingLeft) {
 			if (!this.goX(this.getX() - 3)) {
 				walkingLeft = false;
-				this.getAnimationHandler().setFlipHorizontal(false);
+				this.getAnimationHandler().setFlipHorizontal(true);
 			}
 		} else {
 			if (!this.goX(this.getX() + 3)) {
 				walkingLeft = true;
-				this.getAnimationHandler().setFlipHorizontal(true);
+				this.getAnimationHandler().setFlipHorizontal(false);
 			}
 		}
-		l.setX(this.getX() - 75);
+		if (walkingLeft) {
+			l.setX(this.getX() - 100);
+		} else {
+			l.setX(this.getX() - 80);
+		}
 		l.setY(this.getY() + 20);
-		l.frameEvent();
-		l.draw();
+		
+	}
+	
+	@Override
+	public void draw() {
+		super.draw();
+		try {
+			l.frameEvent();
+			l.draw();
+		} catch (RasterFormatException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	
@@ -67,7 +85,6 @@ public class ScientistLeft extends GameObject{
 					height = height -1;
 				}
 				height = height + 27;
-				
 				
 				this.setHitboxAttributes(0, 16, 208, height);
 				this.getAnimationHandler().setHeight(height);

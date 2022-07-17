@@ -2,7 +2,8 @@ package engine;
 
 import java.util.ArrayList;
 
-
+import gameObjects.FullCrate;
+import gameObjects.GreenFilter;
 import gameObjects.Robot;
 import gameObjects.ScanReigon;
 import map.Room;
@@ -14,9 +15,10 @@ public class GameCode {
 	
 	static int veiwX;
 	static int veiwY;
-	static boolean isScanMode = true;
+	static boolean isScanMode = false;
 	
-	static Robot r2 = new Robot ();
+	static GreenFilter green = new GreenFilter ();
+	
 
 	static ArrayList <Asker> askers = new ArrayList <Asker> ();
 	
@@ -40,14 +42,19 @@ public class GameCode {
 		//Test
         Setup.initAll();
 		Room.loadRoom ("resources/mapdata/lab.tmj");
+		
+		Room.setView(0, 79);
+		FullCrate f = (FullCrate)ObjectHandler.getObjectsByName("FullCrate").get(0);
 
-		ScanReigon r = new ScanReigon (null);
-		r.setRadius (40);
-		r.setTitleText ("HELLO");
-		r.setDescText (new String[] {"DESCRIPTION", "TEXT"});
-		r.declare (256, 256);
-		r2 = new Robot ();
-		r2.declare(170, 290);
+		f.setRenderPriority(20);
+		
+		f.open();
+		
+//		ScanReigon r = new ScanReigon (null);
+//		r.setRadius (40);
+//		r.setTitleText ("HELLO");
+//		r.setDescText (new String[] {"DESCRIPTION", "TEXT"});
+//		r.declare (256, 256);
 	
 	//	Bat b = new Bat();
 	//	b.declare(300,200);
@@ -165,8 +172,9 @@ public class GameCode {
 	
 	
 	public static void renderFunc () {
-		ObjectHandler.renderAll();
 		Room.render();
+		ObjectHandler.renderAll();
+		
 	}
 	
 	public static void beforeRender() {
@@ -175,7 +183,11 @@ public class GameCode {
 	
 	public static void afterRender()
 	{
-		
+		if (isScanMode()) {
+			green.setX(Room.getViewX());
+			green.setY(Room.getViewY());
+			
+		}
 	}
 		
 	public static int getResolutionX() {
@@ -196,6 +208,13 @@ public class GameCode {
 	}
 	
 	public static void setScanMode (boolean scanMode) {
+		if (scanMode) {
+			ObjectHandler.pause(true);
+			green.declare();
+		} else {
+			ObjectHandler.pause(false);
+			green.forget();
+		}
 		isScanMode = scanMode;
 	}
 	

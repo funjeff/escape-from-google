@@ -8,7 +8,25 @@ import java.awt.event.KeyEvent;
 
 public class Robot extends GameObject {
 
+	public static final Sprite IDLE_SPRITE = new Sprite ("resources/sprites/config/robotIdle.txt");
+	public static final Sprite WALK_SPRITE = new Sprite ("resources/sprites/config/robotWalk.txt");
+	
+	public static final Sprite IDLE_CROUCH_SPRITE = new Sprite ("resources/sprites/config/robotCrouchIdle.txt");
+	public static final Sprite WALK_CROUCH_SPRITE = new Sprite ("resources/sprites/config/robotCrouchWalk.txt");
+	
+	
 	double vy = 0;
+	
+	/*
+	boolean learnedMovement = false;
+	boolean learnedJump = false;
+	boolean learnedDuck = false;
+	boolean learnedButtons = false;
+	boolean learnedPlant = false;
+	boolean learnedLadder = false;
+	boolean learnedGrab = false;
+	boolean learnedSUS= false;
+	*/
 	
 	boolean learnedMovement = true;
 	boolean learnedJump = true;
@@ -17,19 +35,25 @@ public class Robot extends GameObject {
 	boolean learnedPlant = true;
 	boolean learnedLadder = true;
 	boolean learnedGrab = true;
-	
+	boolean learnedSUS= true;
 	
 	boolean crouching = false;
 	boolean onLadder = false;
 	
 	public Robot () {
-		this.setSprite(new Sprite ("resources/sprites/robot.png"));
+		this.setSprite(IDLE_SPRITE);
 		this.setHitbox(0,0,this.getSprite().getWidth(),this.getSprite().getHeight());
 		this.adjustHitboxBorders();
+		this.getAnimationHandler().setFrameTime(100);
 	}
 	
 	@Override
 	public void frameEvent () {
+		
+		
+		if (GameCode.keyPressed('E', this)) {
+			GameCode.setScanMode(true);
+		}
 		
 		boolean falling = false;
 		
@@ -41,13 +65,16 @@ public class Robot extends GameObject {
 			vy = vy + 2;
 		}
 		
-		if (this.isColliding("Ladder") && GameCode.keyCheck('W', this)) {
+		if (this.isColliding("Ladder") && GameCode.keyCheck('W', this) && learnedLadder) {
 			this.goY(this.getY() -3);
 			vy = 0;
 		}
 		
-		if (this.isColliding("grabableCeiling") && GameCode.keyCheck('W', this)) {
+		if (this.isColliding("grabableCeiling") && GameCode.keyCheck('W', this) && learnedGrab) {
 			vy = 0;
+			this.getAnimationHandler().setFlipVertical(true);
+		} else {
+			this.getAnimationHandler().setFlipVertical(false);
 		}
 		
 		
@@ -94,22 +121,56 @@ public class Robot extends GameObject {
 			Room.setView((int)(this.getX() - 725), Room.getViewY());
 		}
 		
+		
+		boolean walking = false;
+		
 		if (GameCode.keyCheck('D', this) && learnedMovement) {
 			this.goX(this.getX() + 5);
+			if (!crouching) {
+				this.setSprite(WALK_SPRITE);
+			} else {
+				this.setSprite(WALK_CROUCH_SPRITE);
+			}
+			walking = true;
+			this.getAnimationHandler().setFlipHorizontal(false);
 		}
 		
 		if (GameCode.keyCheck('A', this) && learnedMovement) {
 			this.goX(this.getX() - 5);
+			if (!crouching) {
+				this.setSprite(WALK_SPRITE);
+			} else {
+				this.setSprite(WALK_CROUCH_SPRITE);
+			}
+			walking = true;
+			this.getAnimationHandler().setFlipHorizontal(true);
 		}
+		
+		if (!walking) {
+			if (!crouching) {
+				this.setSprite(IDLE_SPRITE);
+			} else {
+				this.setSprite(IDLE_CROUCH_SPRITE);
+			}
+		}
+		
 		if (GameCode.keyCheck('S',this) && learnedDuck){
-			this.setHitbox(0,19,this.getSprite().getWidth(),16);
+			this.setHitbox(0,0,this.getSprite().getWidth(),23);
 			crouching = true;
+			if (this.getSprite() != WALK_CROUCH_SPRITE) {
+				this.setSprite(IDLE_CROUCH_SPRITE);
+			}
 		} else {
 			if (crouching) {
+				this.setSprite(IDLE_SPRITE);
+				this.setY(this.getY() - 9);
 				this.setHitbox(0,0,this.getSprite().getWidth(),this.getSprite().getHeight());
 				if (Room.isColliding(this)) {
-					this.setHitbox(0,19,this.getSprite().getWidth(),16);
+					this.setSprite(IDLE_CROUCH_SPRITE);
+					this.setHitbox(0,0,this.getSprite().getWidth(),23);
+					this.setY(this.getY()+ 9);
 				} else {
+					
 					crouching = false;
 				}
 			}
@@ -119,6 +180,13 @@ public class Robot extends GameObject {
 			vy = -20;
 		}
 	
+	}
+	
+	@Override
+	public void pausedEvent (){
+		if (GameCode.keyPressed('E', this)) {
+			GameCode.setScanMode(false);
+		}
 	}
 	
 	
@@ -148,6 +216,9 @@ public class Robot extends GameObject {
 	
 	public void unlockGrab () {
 		learnedGrab = true;
+	}
+	public void unlockSUS() {
+		learnedSUS = true;
 	}
 	
 }

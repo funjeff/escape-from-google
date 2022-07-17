@@ -21,6 +21,17 @@ public class ScannablePlant extends GameObject implements Scannable{
 	}
 	
 	@Override
+	public void onDeclare () {
+		
+		ScanReigon r = new ScanReigon (this);
+		
+		r.setRadius (38);
+		r.setTitleText ("Plant");
+		r.setDescText (new String[] {"Blends in with the p", "key breaks with the", "space key"});
+		r.declare (this.getX(), this.getY());
+	}
+	
+	@Override
 	public void scanCompleteAction() {
 		((Robot)ObjectHandler.getObjectsByName("Robot").get(0)).unlockPlant();
 		

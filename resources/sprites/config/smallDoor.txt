@@ -1,0 +1,3 @@
+$src resources/sprites/door.png
+
+ grid 32 96

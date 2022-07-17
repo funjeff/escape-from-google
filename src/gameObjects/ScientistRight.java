@@ -1,5 +1,6 @@
 package gameObjects;
 
+import java.awt.image.RasterFormatException;
 import java.util.Iterator;
 
 import engine.GameObject;
@@ -16,6 +17,7 @@ public class ScientistRight extends GameObject{
 	public ScientistRight () {
 		this.setSprite(new Sprite ("resources/sprites/scientist.png"));
 		this.useSpriteHitbox();
+		this.getAnimationHandler().setFlipHorizontal(true);
 		l = new Light ();
 	}
 	
@@ -24,21 +26,34 @@ public class ScientistRight extends GameObject{
 		if (walkingLeft) {
 			if (!this.goX(this.getX() - 3)) {
 				walkingLeft = false;
-				this.getAnimationHandler().setFlipHorizontal(false);
+				this.getAnimationHandler().setFlipHorizontal(true);
 			}
 		} else {
 			if (!this.goX(this.getX() + 3)) {
 				walkingLeft = true;
-				this.getAnimationHandler().setFlipHorizontal(true);
+				this.getAnimationHandler().setFlipHorizontal(false);
 			}
 		}
-		l.setX(this.getX() - 75);
+		if (walkingLeft) {
+			l.setX(this.getX() - 100);
+		} else {
+			l.setX(this.getX() - 80);
+		}
 		l.setY(this.getY() + 20);
-		l.frameEvent();
-		l.draw();
 	}
 	
-	
+	@Override
+	public void draw() {
+		super.draw();
+		try {
+			l.frameEvent();
+			l.draw();
+		} catch (RasterFormatException e) {
+			//e.printStackTrace();
+		}
+		
+		
+	}
 	
 	private class Light extends GameObject {
 		int height = 240;

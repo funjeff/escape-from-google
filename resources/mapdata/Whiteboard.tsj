@@ -1,0 +1,14 @@
+{ "columns":6,
+ "image":"whiteboard.png",
+ "imageheight":128,
+ "imagewidth":192,
+ "margin":0,
+ "name":"Whiteboard",
+ "spacing":0,
+ "tilecount":24,
+ "tiledversion":"1.9.0",
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":"1.8"
+}

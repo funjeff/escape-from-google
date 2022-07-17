@@ -3,6 +3,7 @@ package gameObjects;
 import engine.GameCode;
 import engine.GameObject;
 import engine.ObjectHandler;
+import engine.Sprite;
 
 public class Frog extends GameObject implements Scannable{
 
@@ -10,8 +11,13 @@ public class Frog extends GameObject implements Scannable{
 	
 	double vy;
 	
+	ScanReigon r = new ScanReigon (this);
+	
 	public Frog () {
-		
+		this.setSprite(new Sprite ("resources/sprites/config/frogIdle.txt"));
+		this.getAnimationHandler().setFrameTime(100);
+		this.setHitbox(0, 0, 16, 16);
+		//this.adjustHitboxBorders();
 	}
 	
 	@Override
@@ -20,6 +26,7 @@ public class Frog extends GameObject implements Scannable{
 			timer = timer + 1;
 		}
 		if (timer % 25 == 0) {
+			this.setSprite(new Sprite ("resources/sprites/config/frogJump.txt"));
 			vy = -20;
 			timer = timer + 1;
 		}
@@ -39,10 +46,20 @@ public class Frog extends GameObject implements Scannable{
 			if (falling) {
 				while (this.goY(this.getY() + 1));
 			}
+			this.setSprite(new Sprite ("resources/sprites/config/frogIdle.txt"));
 			vy = 0;
 		}
 		
 		
+	}
+	
+	@Override
+	public void onDeclare () {
+		
+		r.setRadius (30);
+		r.setTitleText ("Frog");
+		r.setDescText (new String[] {"Hops around", "with the spacebar"});
+		r.declare (this.getX(), this.getY());
 	}
 	
 	@Override

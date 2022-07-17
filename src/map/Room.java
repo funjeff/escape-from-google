@@ -29,6 +29,8 @@ import engine.RenderLoop;
 import engine.Sprite;
 import engine.SpriteParser;
 
+import java.awt.image.RasterFormatException;
+
 public class Room {
 	
 	private static ArrayList <TileData> dataList;  // sorted by numeric ID
@@ -769,6 +771,7 @@ public static MapTile[] getAllCollidingTiles (GameObject obj) {
 			while (tIndex < tileCount) {
 				for (int wx = 0; wx < numColumns && tIndex < tileCount; wx++) {
 					//Parse out the tile here
+					
 					BufferedImage tileImg = rawImg.getSubimage (tileWidth * wx, tileHeight * wy, tileWidth, tileHeight);
 					TileData current = new TileData (tileId);
 					dataList.add(current);
@@ -776,6 +779,7 @@ public static MapTile[] getAllCollidingTiles (GameObject obj) {
 					BufferedImage tile = tileImg;
 					tileIcons.add(tile);
 					tIndex++;
+					
 				}
 				wy++;
 			}
